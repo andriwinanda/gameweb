@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Oswald:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Oswald:wght@500&display=swap');
+
+
+$blue: #0073E5;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #d63384;
+$red: #CB3A31;
+$orange: #E57200;
+$yellow: #ffc107;
+$green: #43936C;
+$teal: #20c997;
+$cyan: #0dcaf0;
+$light: #EFEFEF;
+$gray: #757575;
+$black: #0A0A0A;
+$white: #FFFFFF;
+
+$primary: $red !default;
+$success: $green !default;
+$info: $cyan !default;
+$warning: $orange !default;
+$danger: $red !default;
+$secondary: $gray !default;
+$dark: $gray !default;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+);
+
+$color-value : $primary ,
+$success ,
+$info ,
+$warning ,
+$danger ,
+$secondary,
+$dark;
+
+$colors : "primary ",
+"success ",
+"info ",
+"warning ",
+"danger ",
+"secondary",
+"dark";
+
+@import './style.scss';
+
+$sizes: 2, 4, 6, 8, 9, 10, 12, 14, 16, 18, 22, 24, 26, 30, 46, 54, 62, 70, 94;
+
+@each $size in $sizes {
+  .font-#{$size} {
+    font-size: #{$size}px;
+  }
+}
+
+:root {
+  --blue-color: #0073e5;
+  --gray-secondary-color: #757575;
+  --grey-color: #F5F5F5;
+  --black-color: #272727;
+  --bs-body-font-family: "Inter", Helvetica, Arial, sans-serif;
+  --title-font: 26px;
+  --paragraph-font: 14px;
+
+  :focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .btn {
+    border-radius: 0;
+    transition: ease-out 0.5s;
+  }
+
+  .btn-outline {
+    box-shadow: inset 0 0 0 0 $primary;
+    transition: ease-out 0.5s;
+    border: none !important;
+    outline: 1px solid $primary;
+    outline-offset: 4px;
+    background-color: none !important;
+    padding: 0 12px;
+  }
+
+
+
+  .badge {
+    color: $dark;
+    border: 1px solid;
+    border-radius: 0;
+
+  }
+
+  @for $i from 1 through length($colors) {
+    .badge-#{nth($colors, $i)} {
+      color: #{nth($color-value, $i)};
+      border-color: #{nth($color-value, $i)};
+    }
+  }
+
+  .carousel-item {
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+}
+
+
+// Development Only
+.img-placeholeder {
+  background-color: #757575;
+  color: $white;
+}
+
+
+// global
+body {
+  font-family: "Inter", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    color: var(--blue-color);
+  }
+}
+
+.title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .sub {
+    color: $primary !important;
+  }
+}
+
+.h-divider {
+  border-top: 1px dashed $gray !important;
+  margin: 16px 0;
+}
+.v-divider {
+  border-left: 1px solid $light;
+  height: auto;
+  width: 1px;
+
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+
+// HEADER
+
+.header {
+  padding-top: 20px;
+
+  .logo {
+    width: 300px;
+    height: 100px;
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .top-cc {
+    padding-top: 16px;
+    padding-bottom: 16px;
+
+    .top-cc-item {
+      padding: 8px;
+      text-align: center;
+      border: 1px solid $primary;
+    }
+  }
+}
+
+// FOOTER
+
+.footer {
+  padding: 20px 0;
+
+}
+
+// NAVBAR
+
+.navbar {
+  .navbar-toggler {
+    border-radius: 0 !important;
+    .navbar-toggler-icon {
+      // filter: invert(1) !important;
+
+    }
+  }
+  .navbar-nav .dropdown-menu {
+    border-radius: 0 !important;
+  }
+  .nav-item {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+  }
+}
+
+// MAIN CONTENT
+
+.main-content {
+  .slider {
+    width: 100%;
+  }
+
+  .article {
+    padding-top: 24px;
+
+    .article-headline {
+      .article-headline-image {
+        padding-bottom: 8px;
+      }
+
+      .article-headline-content {
+
+        .article-headline-title {
+          margin-bottom: 8px;
+        }
+
+        .article-headline-preview {
+          margin-bottom: 16px;
+        }
+      }
+    }
+
+  }
+
+  .article-hilight {
+    cursor: pointer;
+  }
+}
+
+// WIDGET
+
+.widget {
+  min-width: 300px;
+
+  .server-status {
+    border: 1px solid $primary;
+    height: 150px;
+  }
+
+  .chip-status {
+    border: 1px solid $primary;
+    height: 150px;
+  }
+
+  .top-killer {
+    // border: 1px solid $primary;
+    text-align: left;
+
+    .nav {
+      .nav-item {
+        .nav-link {
+          font-family: 'Oswald', sans-serif;
+          font-weight: 300;
+          font-size: 12px;
+          border-radius: 0 !important;
+          border: 1px solid $primary;
+        }
+      }
+    }
+
+    .tab-content {
+      padding: 16px;
+      background-color: $light;
+
+      .top-killer-table {
+        width: 100%;
+
+        tr {
+          border-bottom: 1px dashed $gray;
+
+          td {
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+            .icon {
+              // padding-top: 4px;
+              width: 30px;
+            }
+
+            .nickname {
+              padding-bottom: 5px;
+
+              .guild {
+                color: $gray;
+              }
+            }
+
+            .kd-ratio {
+              padding: 0 5px;
+              padding-top: 0;
+              display: flex;
+              border: 1px solid $gray;
+              align-items: center;
+            }
+
+          }
+        }
+      }
+    }
+
+  }
+
+  .discord {}
+}
