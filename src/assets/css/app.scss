@@ -114,6 +114,10 @@ $sizes: 2, 4, 6, 8, 9, 10, 12, 14, 16, 18, 22, 24, 26, 30, 46, 54, 62, 70, 94;
     }
   }
 
+  .form-control {
+    font-size: 14px !important;
+  }
+
 }
 
 
@@ -331,4 +335,42 @@ a {
   }
 
   .discord {}
+}
+
+
+// AUTHENTICATION PAGE
+.login-page {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 40px;
+    width: 200px
+  }
+
+  @media only screen and (max-width: 600px) {
+    img {
+        top: 30px;
+    }
+  }
+
+  .login-section {
+    background: #fff;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 0 5px 0 rgba(42, 45, 48, 0.12);
+    transition: all 0.3s ease;
+    border: none !important;
+    padding: 8px;
+    border-radius: 0 !important;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .login-section {
+        box-shadow: none !important;
+    }
+  }
+
 }

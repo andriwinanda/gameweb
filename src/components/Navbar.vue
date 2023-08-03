@@ -39,7 +39,7 @@
           </li>
 
         </ul>
-        <button class="btn btn-outline btn-outline-primary">Login</button>
+        <button class="btn btn-outline btn-outline-primary" @click="$router.push('/login')">Login</button>
       </div>
     </div>
   </nav>
