@@ -3,7 +3,7 @@ const USER_KEY = 'username'
 
 // TOKEN
 
-export function setToken (token) {
+export function setToken (token: string) {
   localStorage.setItem(TOKEN_KEY, token)
 }
 
@@ -17,7 +17,7 @@ export function removeToken () {
 
 // USER
 
-export function setUser (user) {
+export function setUser (user: string) {
   localStorage.setItem(USER_KEY, user)
 }
 

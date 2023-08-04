@@ -6,7 +6,7 @@ export default createStore({
     isLoading: false
   },
   mutations: {
-    setLoading(state, val) {
+    setLoading(state: { isLoading: any }, val: any) {
       state.isLoading = val
     }
   },

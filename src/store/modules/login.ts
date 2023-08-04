@@ -1,4 +1,4 @@
-import { setToken, removeToken, setUser, getUser, removeUser } from '@/helper/localstorageHelper'
+import { setToken, removeToken, setUser, getUser, removeUser } from '../../helper/localstorageHelper'
 
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
@@ -8,16 +8,16 @@ const state = {
 }
 
 const mutations = {
-  [LOGIN] (state) {
+  [LOGIN] (state: { isLoggedIn: boolean }) {
     state.isLoggedIn = true
   },
-  [LOGOUT] (state) {
+  [LOGOUT] (state: { isLoggedIn: boolean }) {
     state.isLoggedIn = false
   }
 }
 const actions = {
-  login ({ commit, state }, value) {
-    state.login()
+  login ({ commit, state }: any, value: { token: any; username: any }) {
+    state.isLoggedIn = true
     setToken(value.token)
     setUser(value.username)
   },

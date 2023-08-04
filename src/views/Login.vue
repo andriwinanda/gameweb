@@ -22,6 +22,11 @@
             Login
           </button>
         </div>
+
+        <p class="text-center" v-if="errorMessage">
+          <small class="text-danger">{{ errorMessage }}</small>
+        </p>
+
         <p class="text-center">
           Don't have an account? <a class="text-primary" @click="gotoRegister()">Register</a>
         </p>
@@ -32,7 +37,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import services from "@/services/index.ts"
+import services from "../services"
 import { useStore } from 'vuex'
 
 export default defineComponent({
@@ -46,7 +51,8 @@ export default defineComponent({
     return {
       password: '',
       username: '',
-      isLoading: false
+      isLoading: false,
+      errorMessage: ''
     }
   },
   methods: {
@@ -56,6 +62,7 @@ export default defineComponent({
     loginAction() {
       if (this.username && this.password) {
         this.isLoading = true
+        this.errorMessage = ''
         const data = {
           username: this.username,
           password: this.password
@@ -69,6 +76,12 @@ export default defineComponent({
             }, 500)
           })
           .catch(err => {
+            if (err.response.status === 401)  {
+              this.errorMessage = 'Invalid username/password!'
+            } else {
+              this.errorMessage = err.response.data.message
+
+            }
             this.isLoading = false
           })
       }

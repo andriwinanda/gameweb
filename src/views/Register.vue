@@ -1,7 +1,7 @@
 <template>
   <div class="login-page d-flex align-items-center justify-content-center">
 
-    <img src="../assets/img/logo.png" alt="">
+    <img src="../assets/img/logo.png" alt=''>
 
     <div class="login-section card shadow">
       <div class="card-body">
@@ -45,6 +45,11 @@
             Register
           </button>
         </div>
+
+        <p class="text-center" v-if="errorMessage">
+          <small class="text-danger">{{ errorMessage }}</small>
+        </p>
+
         <p class="text-center">
           Have an account? <a class="text-primary" @click="gotoLogin()">Login</a>
         </p>
@@ -71,70 +76,72 @@ export default defineComponent({
         password: '',
         email: '',
         confirmPass: '',
-        pin:""
+        pin:''
       },
       disabled: [true, true, true, true, true],
-      isLoading: false
+      isLoading: false,
+      errorMessage: ''
     }
   },
   methods:{
-    validateEmail(value) {
+    validateEmail(value: string) {
       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
       {
-        this.msg['email'] = "";
+        this.msg['email'] = ''
         this.disabled[0] = false
       } else {
-        this.msg['email'] = 'Invalid Email Address';
+        this.msg['email'] = 'Invalid Email Address'
         this.disabled[0] = true
       }
     },
-    validateUsername(value) {
+    validateUsername(value: string) {
       const regex = /^\w+$/
       if (value.length > 4 && regex.test(value)) {
-        this.msg['username'] = '';
+        this.msg['username'] = ''
         this.disabled[1] = false
 
       } else {
-        this.msg['username'] = 'Min. 4 characters & Alphanumeric!' ;
+        this.msg['username'] = 'Min. 4 characters & Alphanumeric!'
         this.disabled[1] = true
 
       }
     },
-    validatePassword(value) {
+    validatePassword(value: string) {
       if (value.length < 6) {
-        this.msg['password'] = 'Min. 6 characters!' ;
+        this.msg['password'] = 'Min. 6 characters!'
         this.disabled[2] = true
 
       } else {
-         this.msg['password'] = '';
+         this.msg['password'] = ''
          this.disabled[2] = false
 
       }
     },
-    validateConfirmPassword(value) {
+    validateConfirmPassword(value: string) {
       if (value !== this.password) {
-        this.msg['confirmPass'] = 'Not match with password' ;
+        this.msg['confirmPass'] = 'Not match with password'
         this.disabled[3] = true
 
       } else {
-         this.msg['confirmPass'] = '';
+         this.msg['confirmPass'] = ''
          this.disabled[3] = false
 
       }
     },
-    validatePin(value) {
+    validatePin(value: string) {
       const regex = /^\d+$/
       if (value.length === 6 && regex.test(value)) {
-        this.msg['pin'] = '';
+        this.msg['pin'] = ''
         this.disabled[4] = false
 
       } else {
-        this.msg['pin'] = 'Must be 6 characters & Numeric!' ;
+        this.msg['pin'] = 'Must be 6 characters & Numeric!'
         this.disabled[4] = true
       }
     },
 
     register () {
+      this.errorMessage = ''
       this.isLoading = true
       const data = {
         id: this.username,
@@ -152,6 +159,7 @@ export default defineComponent({
           }, 500)
         })
         .catch(err => {
+          this.errorMessage = err.response.data.message
           this.isLoading = false
         })
 
@@ -164,19 +172,19 @@ export default defineComponent({
 
   watch: {
     username(value){
-      this.validateUsername(value);
+      this.validateUsername(value)
     },
     email(value){
-      this.validateEmail(value);
+      this.validateEmail(value)
     },
     password(value){
-      this.validatePassword(value);
+      this.validatePassword(value)
     },
     confirmPass(value){
-      this.validateConfirmPassword(value);
+      this.validateConfirmPassword(value)
     },
     pin(value){
-      this.validatePin(value);
+      this.validatePin(value)
     }
   },
 })

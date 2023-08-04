@@ -1,7 +1,5 @@
 import axios from 'axios'
 import { BASE_URL } from '@/helper/keyHelper'
-import {getToken} from "@/helper/localstorageHelper.js"
-import {forceLogout} from "@/helper/functionHelper";
 
 const axiosCustom = axios.create()
 axiosCustom.defaults.baseURL = BASE_URL+'/v1'
