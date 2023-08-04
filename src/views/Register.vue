@@ -41,7 +41,7 @@
 
         </div>
         <div class="d-grid gap-2 mb-2">
-          <button type="button" class="btn btn-primary shadow-none" :disabled="disabled.includes(true)" @click="register()">
+          <button type="button" class="btn btn-primary shadow-none" :disabled="disabled.includes(true) || isLoading" @click="register()">
             Register
           </button>
         </div>
@@ -73,7 +73,8 @@ export default defineComponent({
         confirmPass: '',
         pin:""
       },
-      disabled: [true, true, true, true, true]
+      disabled: [true, true, true, true, true],
+      isLoading: false
     }
   },
   methods:{
@@ -134,21 +135,24 @@ export default defineComponent({
     },
 
     register () {
+      this.isLoading = true
       const data = {
-        username: this.username,
+        id: this.username,
         email: this.email,
         password: this.password,
-        'confirm-password': this.confirmPass,
         pin: this.pin
       }
 
       services.register(data)
         .then(res => {
+          this.isLoading = false
+
           setTimeout(() => {
             location.replace('/login')
           }, 500)
         })
         .catch(err => {
+          this.isLoading = false
         })
 
     },

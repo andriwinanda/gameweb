@@ -18,7 +18,7 @@
             class="form-control shadow-no ne form-input" @keyup.enter="loginAction()" required>
         </div>
         <div class="d-grid gap-2 mb-2">
-          <button type="button" class="btn btn-primary shadow-none" @click="loginAction()">
+          <button type="button" class="btn btn-primary shadow-none" :disabled="isLoading" @click="loginAction()">
             Login
           </button>
         </div>
@@ -46,6 +46,7 @@ export default defineComponent({
     return {
       password: '',
       username: '',
+      isLoading: false
     }
   },
   methods: {
@@ -53,19 +54,24 @@ export default defineComponent({
       this.$router.push('/register')
     },
     loginAction() {
-      const data = {
-        username: this.username,
-        password: this.password
+      if (this.username && this.password) {
+        this.isLoading = true
+        const data = {
+          username: this.username,
+          password: this.password
+        }
+        services.login(data)
+          .then(res => {
+            this.isLoading = false
+            this.store.dispatch('login/login', res.data)
+            setTimeout(() => {
+              location.replace('/')
+            }, 500)
+          })
+          .catch(err => {
+            this.isLoading = false
+          })
       }
-      services.login(data)
-        .then(res => {
-          this.store.dispatch('login/login', res.data)
-          setTimeout(() => {
-            location.replace('/')
-          }, 500)
-        })
-        .catch(err => {
-        })
     }
   },
 

@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'token'
+const TOKEN_KEY = 'id'
 const USER_KEY = 'username'
 
 // TOKEN
